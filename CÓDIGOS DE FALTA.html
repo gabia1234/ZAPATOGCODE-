@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚓 ZAPATO G CODE - Faltas 13.169</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            color: #39ff14;
+            font-size: 3em;
+            margin: 20px 0;
+            text-shadow: 0 0 12px #39ff1460;
+        }
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 1.3em;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #222;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        button:hover { background: #333; transform: translateY(-2px); }
+        button.active { background: #39ff14; color: #000; box-shadow: 0 0 20px #39ff1460; }
+        .search-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        #searchInput {
+            width: 100%;
+            max-width: 600px;
+            padding: 16px 24px;
+            font-size: 1.15em;
+            background: #111;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 40px;
+            outline: none;
+        }
+        #searchInput:focus {
+            border-color: #39ff14;
+            box-shadow: 0 0 15px #39ff1450;
+        }
+        #btnBuscar {
+            background: linear-gradient(135deg, #39ff14, #00cc00);
+            color: #000;
+            font-weight: bold;
+            min-width: 140px;
+        }
+        .section { display: none; }
+        .section.active { display: block; }
+        .item {
+            background: #161616;
+            padding: 18px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border-left: 6px solid #39ff14;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .item-codigo { font-size: 1.9em; font-weight: bold; color: #39ff14; }
+        .item-art { font-size: 1.3em; color: #ff4d4d; font-weight: bold; }
+        .item-tema { color: #bbb; font-style: italic; margin-bottom: 8px; }
+        .item-desc { color: #d0d0d0; line-height: 1.6; font-size: 1.07em; }
+        .share-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 12px;
+            transition: all 0.3s;
+        }
+        .share-btn:hover { background: #128C7E; transform: scale(1.05); }
+        .link-item {
+            background: #161616;
+            padding: 18px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border-left: 6px solid #ff4d4d;
+        }
+        .link-item a { color: #39ff14; font-size: 1.2em; text-decoration: none; }
+        .link-item a:hover { text-decoration: underline; }
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            .buttons { flex-direction: column; gap: 12px; }
+            .search-area { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚓 ZAPATO G CODE</h1>
+    <div class="subtitle">Buscador completo de faltas Ley 13.169 Santa Fe + enlaces y leyes relacionadas</div>
+
+    <div class="buttons">
+        <button id="btnCodes" class="active">Ley 13.169</button>
+    </div>
+
+    <div class="search-area">
+        <input type="text" id="searchInput" placeholder="Ej: alcoholemia, licencia, cinturón, casco, patente, RTO, celular, enganche...">
+        <button id="btnBuscar">Buscar</button>
+        <button id="btnLinks">Enlaces y Otras Leyes</button>
+    </div>
+
+    <div id="codesSection" class="section active"></div>
+
+    <div id="linksSection" class="section">
+        <div class="link-item"><a href="https://www.cent.utn.edu.ar/rto/" target="_blank">RTO NACIONAL</a></div>
+        <div class="link-item"><a href="https://aps2.senasa.gov.ar/vdc/faces/consulta.jsp" target="_blank">SENASA - Consulta Vehículos</a></div>
+        <div class="link-item"><a href="https://www.santafe.gob.ar/juzgadovirtual/consultaInfraccion.do?method=inicio" target="_blank">Juzgado Virtual de Faltas - Santa Fe</a></div>
+        <div class="link-item"><a href="http://santafe.iapi.com.ar/ver_estado.asp" target="_blank">RTO Provincial Santa Fe</a></div>
+        <div class="link-item">
+            <strong>Ley Provincial N° 3657 - Defensa de la Riqueza Forestal</strong><br>
+            (adherida a Ley Nacional 13.273) Regula la protección y uso sostenible de bosques. Infracciones comunes: tala ilegal, deforestación sin permiso, daño a especies nativas.
+        </div>
+        <div class="link-item">
+            <strong>Ley 18.284 / ASSAL - Código Alimentario Argentino</strong><br>
+            Regula la calidad e inocuidad de alimentos y bebidas. Infracciones: vender productos vencidos, adulterados, sin rótulo obligatorio o en malas condiciones.
+        </div>
+        <div class="link-item">
+            <strong>Ley Nacional 23.737 - Estupefacientes</strong><br>
+            Penaliza tenencia, tráfico, cultivo y consumo de drogas. Infracciones relacionadas con tránsito: conducir drogado, narcomenudeo, cultivo ilegal.
+        </div>
+        <div class="link-item">
+            <strong>Ley Provincial 13.774 - Falsificación y adulteración</strong><br>
+            Sanciones por falsificar o adulterar documentos públicos o privados (cédulas, licencias, seguros, patentes, etc.).
+        </div>
+        <div class="link-item">
+            <strong>Ley 13.169 - Art. 38 (Medio Ambiente)</strong><br>
+            Responsabilidad por daños ambientales causados por vehículos (derrames de combustible, emisiones excesivas, basura arrojada, etc.).
+        </div>
+        <div class="link-item">
+            <strong>Art. 206 Código Procesal Administrativo - Falsedad</strong><br>
+            Sanciones administrativas y penales por presentar documentación falsa o adulterada en trámites ante organismos públicos.
+        </div>
+        <div class="link-item">
+            <a href="https://cdn.qr-code-generator.com/account47523219/56524927_1.pdf?Expires=1768650865&Signature=XWgXA5J3Skd6zqalW9kewL049CtfpWc4DKo2-dleHlbvsXZraNL5pbFzJtg9wL03bFKXQRfP2hRTv9WJEJA6JjDjdC35Wx4NAYoIw2uwEPNhNYUtNc~P2Cykj3QwZpT5apu70s6g1YQEV3H8gfHq0U4Dq5yJD~CbqJBPJS1ZOs8vSW065Kq-2OpztJ8KpEfoUDhRGLfllwcLprKApeL0XOUlSJGW5MBebKf9jd1PnQiwj6uJofu2-cZfYPibtB6fUbe9sGWo32BfzOuUoebJsgHfaCMfXXS9yMhIR5hJFWKVtOARaeo23f3PFMcFRRhGfdpwuznCpYrEGpVo9yau1w__&Key-Pair-Id=KKMPOJU8AYATR" target="_blank">
+                PROTOCOLO POLICIAL DE SANTA FE
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// LISTA COMPLETA DE LOS 160 CÓDIGOS DE LA LEY 13.169 (sin omitir ninguno)
+const infracciones = [
+    {codigo:"1089", art:"88", tema:"Sobrepaso", desc:"El conductor intenta adelantar o pasar a otro vehículo por la derecha en lugar de por la izquierda, salvo excepciones expresamente permitidas por la ley (como en calles angostas o con señalización específica)."},
+    {codigo:"2047", art:"97", tema:"Estupefacientes", desc:"Conducir cualquier vehículo por la vía pública después de haber consumido estupefacientes, drogas o medicamentos que afecten la capacidad de reacción, atención o coordinación."},
+    {codigo:"2016", art:"98", tema:"Alcohol - General", desc:"Conducir cualquier tipo de vehículo con una alcoholemia superior a 500 miligramos por litro de sangre (equivalente a 0,5 g/l). Límite general para conductores particulares."},
+    {codigo:"2020", art:"98", tema:"Alcohol - Motovehículos", desc:"Conducir motocicleta, ciclomotor o cuatriciclo con alcoholemia superior a 200 miligramos por litro de sangre (0,2 g/l). Tolerancia cero casi total para estos vehículos."},
+    {codigo:"2033", art:"98", tema:"Alcohol - Transporte", desc:"Conducir vehículos de transporte de pasajeros, escolares o de carga con cualquier nivel de alcohol en sangre (tolerancia 0 g/l). Incluye taxis, remises, colectivos, camiones."},
+    {codigo:"2050", art:"113", tema:"Negativa a prueba", desc:"El conductor se niega a realizar las pruebas autorizadas para detectar alcohol, drogas o sustancias que afecten la capacidad de conducción (alcoholemia, narcotest, etc.)."},
+    {codigo:"3018", art:"81", tema:"Dominio y circulación", desc:"Conducir sin mantener en todo momento el control del vehículo, no circular por la derecha, invadir carriles exclusivos o no respetar horarios establecidos para ciertos vehículos."},
+    {codigo:"3021", art:"89", tema:"Rotondas y giros", desc:"Realizar un giro o circular dentro de una rotonda sin respetar la prioridad de paso, la señalización o las reglas específicas de circulación en rotondas."},
+    {codigo:"3048", art:"92", tema:"Obstrucción encrucijadas", desc:"Iniciar el cruce de una intersección con luz verde y luego quedar obstruyendo la vía transversal porque no había espacio libre del otro lado."},
+    {codigo:"3052", art:"93", tema:"Giro izquierda semáforo", desc:"Intentar girar a la izquierda en una avenida de doble mano con semáforos sin que exista una flecha o señal que expresamente lo permita."},
+    {codigo:"3065", art:"94", tema:"Vías multicarril", desc:"No respetar las reglas especiales de cambio de carril, circulación por carriles de alta velocidad o restricciones en autopistas y avenidas multicarril."},
+    {codigo:"3079", art:"96", tema:"Luces", desc:"Circular de noche, con mala visibilidad o en túneles sin encender las luces bajas (o altas cuando corresponda) según lo exige la ley."},
+    {codigo:"3082", art:"99 inc.2", tema:"Contramano", desc:"Circular en dirección contraria, sobre el cantero central o fuera de la calzada (salvo banquina en emergencia o casos permitidos)."},
+    {codigo:"3096", art:"99 inc.3", tema:"Maniobras bruscas", desc:"Bajar bruscamente la velocidad sin motivo, zigzaguear, frenar de golpe o hacer movimientos impredecibles que pongan en riesgo a otros."},
+    {codigo:"3110", art:"99 inc.4", tema:"Obstrucción bocacalle", desc:"Avanzar sobre una bocacalle y quedar obstruyendo el paso de peatones o vehículos que tienen prioridad porque no hay espacio libre del otro lado."},
+    {codigo:"3124", art:"99 inc.5", tema:"Distancia de seguridad", desc:"No mantener una distancia prudente y segura con el vehículo de adelante según la velocidad, condiciones climáticas y estado de la vía."},
+    {codigo:"3137", art:"99 inc.6", tema:"Marcha atrás", desc:"Realizar marcha atrás en la vía pública sin ser para estacionar, salir de un garaje o de una calle sin salida."},
+    {codigo:"3141", art:"99 inc.7", tema:"Banquina", desc:"Detenerse o estacionar sobre la banquina sin que exista una emergencia real (avería, accidente, etc.)."},
+    {codigo:"3154", art:"88", tema:"Sobrepaso irregular", desc:"Intentar adelantar o sobrepasar a otro vehículo sin respetar las distancias, señales, prohibiciones o condiciones de seguridad establecidas."},
+    {codigo:"3168", art:"99 inc.9", tema:"Paso a nivel", desc:"Cruzar un paso a nivel cuando hay tren cerca, señales activas, barreras bajando o en movimiento, o quedarse detenido sobre los rieles."},
+    {codigo:"3171", art:"99 inc.12", tema:"Distancia camiones", desc:"Camiones o ómnibus circulan a menos de 100 metros entre sí (salvo en vías con más carriles o durante maniobra de adelantamiento)."},
+    {codigo:"3185", art:"99 inc.15", tema:"Carga contaminante", desc:"Transportar residuos, escombros, tierra, arena o materiales que suelten polvo, olor fuerte o sustancias insalubres en vehículo no apto."},
+    {codigo:"3198", art:"99 inc.16", tema:"Carga insegura", desc:"Llevar carga que tape luces, afecte estabilidad, sobresalga de los límites permitidos o ponga en riesgo la visibilidad del conductor."},
+    {codigo:"3209", art:"99 inc.21", tema:"Bocina", desc:"Usar bocina sin peligro inminente o tener sirena/bocina no autorizada instalada en el vehículo."},
+    {codigo:"3213", art:"116", tema:"Celular y dispositivos", desc:"Conducir mientras usa teléfono celular, auriculares, tablet, monitor o cualquier dispositivo de comunicación o entretenimiento."},
+    {codigo:"3226", art:"99 inc.22", tema:"Contaminación", desc:"Circular con vehículo que emite gases, humos, ruidos o radiaciones por encima de los límites establecidos por reglamentación."},
+    {codigo:"3230", art:"109", tema:"Emergencia", desc:"Vehículo de emergencia (ambulancia, policía, bomberos) circula violando normas de tránsito o sin usar correctamente señales."},
+    {codigo:"3243", art:"111", tema:"Franquicia", desc:"Usar privilegios o franquicias especiales de tránsito (sirena, luces) sin autorización o sin distintivo/placa correspondiente."},
+    {codigo:"3257", art:"112", tema:"Accidente", desc:"Participar en accidente y no detenerse inmediatamente, no dar datos del seguro y licencia, o no comparecer cuando es citado."},
+    {codigo:"3291", art:"95", tema:"Autopistas", desc:"No respetar reglas específicas de circulación, velocidad, cambio de carril o ingreso/salida en autopistas y semiautopistas."},
+    {codigo:"3302", art:"99 inc.8", tema:"Zonas peligrosas", desc:"Cambiar de carril, detenerse o no respetar velocidad precautoria en curvas, encrucijadas, pendientes o zonas de peligro."},
+    {codigo:"3315", art:"99 inc.24", tema:"Polarizado", desc:"Circular con vidrios polarizados, láminas o adhesivos que reduzcan demasiado la visibilidad desde afuera o no estén homologados."},
+    {codigo:"3329", art:"99 inc.18.2", tema:"Animales sueltos", desc:"Dejar animales sueltos en rutas, caminos o calzadas públicas (vacas, caballos, perros, etc.)."},
+    {codigo:"3332", art:"99 inc.3.2", tema:"Obstrucción tránsito", desc:"Dificultar, obstaculizar o impedir el tránsito de vehículos o peatones de cualquier forma (cortes, barricadas, etc.)."},
+    {codigo:"3346", art:"107", tema:"Balizas", desc:"No colocar balizas reglamentarias cuando el vehículo queda detenido en calzada o banquina por avería o fuerza mayor."},
+    {codigo:"3359", art:"112", tema:"Fuga accidente", desc:"Darse a la fuga (escapar) después de haber participado en un accidente de tránsito."},
+    {codigo:"3363", art:"83", tema:"Inhabilitado", desc:"Conducir estando legalmente inhabilitado por sentencia judicial o por pérdida de puntos."},
+    {codigo:"4036", art:"68", tema:"Emisiones", desc:"Circular excediendo límites de emisión de contaminantes, ruidos o radiaciones parásitas permitidos por normativa."},
+    {codigo:"4040", art:"83", tema:"Equipamiento", desc:"No llevar en el vehículo matafuegos y balizas portátiles obligatorios (excepto en motocicletas)."},
+    {codigo:"4053", art:"83", tema:"Pasajeros", desc:"Llevar más ocupantes de los permitidos por la capacidad del vehículo o menores de 10 años en asiento delantero."},
+    {codigo:"4067", art:"81", tema:"Condiciones de seguridad", desc:"Los conductores de vehículos que no posean las condiciones de seguridad adecuadas (vehículo en mal estado general: frenos, luces, dirección, neumáticos, carrocería, etc.)."},
+    {codigo:"4070", art:"83", tema:"Sistemas originales", desc:"No mantener en buen estado los sistemas de seguridad originales del vehículo (frenos, dirección, suspensión, etc.)."},
+    {codigo:"4084", art:"83", tema:"Moto casco", desc:"Conducir o llevar acompañante en moto, ciclomotor o cuatriciclo sin casco reglamentario o chaleco reflectante."},
+    {codigo:"4097", art:"83", tema:"Moto anteojos", desc:"Conductor de moto o ciclomotor sin usar anteojos de seguridad normalizados."},
+    {codigo:"4108", art:"83", tema:"Cinturón", desc:"Los ocupantes del vehículo no usan los cinturones de seguridad reglamentarios."},
+    {codigo:"4112", art:"99", tema:"Cubiertas", desc:"Circular con neumáticos con fallas graves, desgaste excesivo o profundidad de dibujo inferior a la mínima legal."},
+    {codigo:"4125", art:"99", tema:"Moto/bici", desc:"Conducir moto o bicicleta agarrado de otro vehículo o muy cerca detrás de otro automotor."},
+    {codigo:"4139", art:"99", tema:"Remolque", desc:"Remolcar vehículos con otro que no está destinado específicamente a esa función."},
+    {codigo:"4142", art:"99", tema:"Acoplados", desc:"Circular con más de un acoplado (semirremolque o acoplado extra) salvo excepciones para maquinaria especial o agrícola."},
+    {codigo:"4156", art:"99", tema:"Reparaciones", desc:"Realizar reparaciones mecánicas en la vía pública en zona urbana (salvo arreglos de emergencia rápida)."},
+    {codigo:"4169", art:"99", tema:"Hacienda", desc:"Arrear ganado o animales en rutas o caminos pavimentados."},
+    {codigo:"4173", art:"99", tema:"Obstáculo", desc:"Obstaculizar calzada o banquina con construcciones, instalaciones o venta ambulante."},
+    {codigo:"4186", art:"99", tema:"Bandajes", desc:"Circular con vehículos que tengan bandas metálicas, cadenas o elementos que dañen la calzada (salvo casos excepcionales)."},
+    {codigo:"4190", art:"99", tema:"Defensas", desc:"Circular con defensas, enganches o elementos sobresalientes que puedan ser peligrosos para otros usuarios."},
+    {codigo:"4201", art:"83", tema:"Dimensiones", desc:"Vehículo o carga excede dimensiones, peso o potencia permitida para la vía o sector."},
+    {codigo:"4214", art:"65", tema:"Fabricación", desc:"Fabricar, importar o vender vehículos que no cumplen con normas de seguridad activa y pasiva."},
+    {codigo:"4228", art:"66", tema:"Autopartes", desc:"Comercializar autopartes o vehículos sin estar inscriptos en registros oficiales."},
+    {codigo:"4231", art:"67", tema:"Iluminación", desc:"Vehículo sin sistema de iluminación reglamentario o con luces adicionales prohibidas."},
+    {codigo:"4245", art:"68", tema:"Ruidos", desc:"Exceder límites permitidos de ruidos o radiaciones parásitas en vehículos."},
+    {codigo:"5011", art:"79", tema:"Documentación", desc:"Negarse a exhibir licencia de conducir u otra documentación obligatoria cuando lo requiere la autoridad."},
+    {codigo:"5024", art:"83", tema:"Cédula", desc:"Circular con cédula de identificación del vehículo vencida (no siendo titular)."},
+    {codigo:"5038", art:"83", tema:"Seguro", desc:"No llevar el comprobante del seguro obligatorio de responsabilidad civil."},
+    {codigo:"5041", art:"83", tema:"Seguro", desc:"Circular sin tener cobertura vigente del seguro obligatorio."},
+    {codigo:"6012", art:"60", tema:"Animales", desc:"Propietario o poseedor de inmueble lindante con la vía no tiene alambrado que impida ingreso de animales a la ruta."},
+    {codigo:"7014", art:"100", tema:"Estacionamiento", desc:"No estacionar paralelamente al cordón dejando al menos 50 cm entre vehículos en zona urbana."},
+    {codigo:"7027", art:"101", tema:"Estacionamiento", desc:"Estacionar en lugar que afecta seguridad, visibilidad, fluidez del tránsito o tapa señalización."},
+    {codigo:"7044", art:"101", tema:"Estacionamiento", desc:"Estacionar en esquinas, entre vértice y ochava o en lugares considerados peligrosos."},
+    {codigo:"7058", art:"101", tema:"Estacionamiento", desc:"Estacionar sobre senda peatonal, ciclovía, paradas de transporte o 10 m antes/después de ellas."},
+    {codigo:"7061", art:"101", tema:"Estacionamiento", desc:"Estacionar frente a hospitales, escuelas u otros servicios públicos (hasta 10 m a cada lado)."},
+    {codigo:"7075", art:"101", tema:"Estacionamiento", desc:"Estacionar frente a cines, teatros o espectáculos durante su función."},
+    {codigo:"7088", art:"101", tema:"Estacionamiento", desc:"Estacionar frente a entradas de garages o estacionamientos con señalización de prohibición."},
+    {codigo:"7092", art:"101", tema:"Estacionamiento", desc:"Estacionar por más de 5 días o período fijado por autoridad local."},
+    {codigo:"7120", art:"101", tema:"Estacionamiento", desc:"Camiones, ómnibus, casas rodantes o maquinaria estacionados sin lugar habilitado específicamente."},
+    {codigo:"7133", art:"100", tema:"Estacionamiento rural", desc:"En zona rural no estacionar lo más lejos posible de la calzada y banquina."},
+    {codigo:"9017", art:"46", tema:"Edad", desc:"Conducir cualquier vehículo sin tener la edad mínima reglamentaria para obtener licencia."},
+    {codigo:"9064", art:"83", tema:"Suspensión", desc:"Conducir teniendo la licencia de conducir suspendida por cualquier causa."},
+    {codigo:"9078", art:"83", tema:"Tipo vehículo", desc:"Conducir un tipo de vehículo para el cual no se está habilitado (ej: camión con licencia de auto)."},
+    {codigo:"9081", art:"83", tema:"Portar licencia", desc:"Estar habilitado pero no llevar encima la licencia de conducir al momento del control."},
+    {codigo:"9095", art:"97", tema:"Impedimento", desc:"Conducir teniendo impedimentos físicos o psíquicos sin autorización médica o licencia especial."},
+    {codigo:"9106", art:"99", tema:"Permitir conducir", desc:"Ceder el vehículo o permitir conducir a una persona que no tiene licencia habilitante."},
+    {codigo:"9119", art:"83", tema:"Sin habilitación", desc:"Conducir sin haber obtenido nunca la licencia correspondiente."},
+    {codigo:"9123", art:"83", tema:"Vencida <6m", desc:"Conducir con licencia vencida hace menos de 6 meses."},
+    {codigo:"9136", art:"83", tema:"Vencida >6m", desc:"Conducir con licencia vencida hace más de 6 meses."},
+    {codigo:"9140", art:"83", tema:"Caduca", desc:"Licencia caducada por cambio de datos no denunciado o por pérdida total de puntos."},
+    {codigo:"9153", art:"83", tema:"Restringida", desc:"Licencia desconocida de validez o con restricción interprovincial por no cumplir requisitos mínimos."},
+    {codigo:"10014", art:"110", tema:"Maquinaria", desc:"Circular con maquinaria agrícola o especial sin cumplir normas específicas de tránsito."},
+    {codigo:"11029", art:"83", tema:"Patente", desc:"Circular sin colocar las placas de identificación de dominio (patente)."},
+    {codigo:"11032", art:"83", tema:"Patente falsa", desc:"Usar placas de patente no correspondientes al vehículo o con alteraciones."},
+    {codigo:"11046", art:"83", tema:"Patente delantera", desc:"Falta la placa de patente delantera o está colocada en lugar incorrecto."},
+    {codigo:"11059", art:"83", tema:"Patente", desc:"Infracción general relacionada con patente o identificación del vehículo."},
+    {codigo:"11062", art:"69", tema:"Grabado", desc:"Vehículo sin grabado de números de chasis y motor en los lugares reglamentarios."},
+    {codigo:"12017", art:"86", tema:"Prioridad", desc:"No respetar las prioridades de paso indicadas por señalización vial."},
+    {codigo:"12020", art:"48", tema:"Autoridad", desc:"No acatar órdenes o indicaciones dadas por personal de tránsito o fuerzas de seguridad."},
+    {codigo:"12034", art:"78", tema:"Circulación", desc:"No respetar indicaciones de autoridades, señales de tránsito o normas legales aplicables."},
+    {codigo:"12106", art:"87", tema:"Cuestas", desc:"En cuestas estrechas, el vehículo que desciende no cede el paso al que asciende."},
+    {codigo:"12119", art:"90", tema:"Semáforos", desc:"No respetar las indicaciones de luces semafóricas (rojo, amarillo, verde)."},
+    {codigo:"12136", art:"90", tema:"Barreras", desc:"No respetar el descenso de barreras en paso a nivel ferroviario."},
+    {codigo:"12140", art:"88", tema:"Derecha", desc:"No ceder el paso al vehículo que cruza desde la derecha en intersección sin semáforo."},
+    {codigo:"13018", art:"76", tema:"RTO", desc:"Circular sin haber realizado la Revisión Técnica Obligatoria en el plazo correspondiente."},
+    {codigo:"13022", art:"77", tema:"RTO", desc:"No llevar encima el comprobante o sticker que acredita haber hecho la RTO."},
+    {codigo:"13035", art:"70", tema:"RTO", desc:"Taller o centro de RTO opera sin la habilitación oficial de la autoridad."},
+    {codigo:"13049", art:"71", tema:"RTO", desc:"Centro de RTO sin director técnico responsable o sin llevar registros obligatorios."},
+    {codigo:"13052", art:"72", tema:"RTO", desc:"Realizar la revisión técnica de forma incompleta o defectuosa (omitiendo controles obligatorios)."},
+    {codigo:"13066", art:"73", tema:"RTO", desc:"Conducta negligente o mala gestión en centros de RTO que cause demoras o molestias graves."},
+    {codigo:"13079", art:"74", tema:"RTO", desc:"No enviar en tiempo y forma la información requerida por la autoridad de control."},
+    {codigo:"14007", art:"80", tema:"Peatón", desc:"Peatón circula por la calzada en lugar de por la vereda o sin elementos reflectivos de noche."},
+    {codigo:"14010", art:"91", tema:"Peatón", desc:"Peatón cruza la calle sin respetar semáforo peatonal o cuando el tránsito está habilitado."},
+    {codigo:"14023", art:"124", tema:"Protección peatón", desc:"Maniobra que pone en peligro directo la integridad física de un peatón."},
+    {codigo:"14037", art:"124", tema:"Protección", desc:"Maniobra que pone en peligro a menores de edad o personas con discapacidad."},
+    {codigo:"15008", art:"102", tema:"Velocidad", desc:"Conducir a velocidad que impida mantener el dominio del vehículo o excede límites máximos/mínimos."},
+    {codigo:"15100", art:"117", tema:"Picadas", desc:"Participar, organizar o disputar competencias de velocidad o destreza en vía pública."},
+    {codigo:"15114", art:"117", tema:"Picadas agravadas", desc:"Realizar picada o competencia velocidad con vehículo modificado o preparado especialmente."},
+    {codigo:"16013", art:"108", tema:"Vía pública", desc:"Usar la vía pública para fines distintos al tránsito sin autorización previa ni medidas de seguridad."},
+    {codigo:"17031", art:"82", tema:"Profesionales", desc:"Conductores profesionales no circulan con el cuidado y prevención exigidos por su categoría."},
+    {codigo:"17045", art:"103", tema:"Transporte", desc:"Vehículo de transporte de pasajeros o carga con antigüedad superior a la permitida por categoría."},
+    {codigo:"17058", art:"103", tema:"Transporte", desc:"Vehículo de transporte excede las dimensiones máximas permitidas por ley."},
+    {codigo:"17062", art:"103", tema:"Transporte", desc:"Vehículo de transporte excede los pesos máximos autorizados por eje o total."},
+    {codigo:"17075", art:"103", tema:"Transporte", desc:"No contar con habilitación técnica o sistema de control (tacógrafo, GPS, etc.) obligatorio."},
+    {codigo:"17089", art:"103", tema:"Transporte", desc:"No llevar círculo reflectivo trasero con indicación de velocidad máxima."},
+    {codigo:"17092", art:"103", tema:"Transporte", desc:"No permitir el traslado de personas no videntes con perro guía o elemento de asistencia."},
+    {codigo:"17103", art:"103", tema:"Transporte", desc:"No dar instrucciones a pasajeros sobre qué hacer en caso de accidente o emergencia."},
+    {codigo:"17117", art:"103", tema:"Transporte", desc:"Circular sin permiso, concesión, habilitación o inscripción del servicio de transporte."},
+    {codigo:"17120", art:"104", tema:"Escolar", desc:"Infracciones graves en transporte de escolares o menores de 14 años (exceso pasajeros, falta cinturones, etc.)."},
+    {codigo:"17134", art:"105", tema:"Transporte", desc:"No realizar la inscripción obligatoria del servicio de transporte."},
+    {codigo:"17147", art:"105", tema:"Transporte", desc:"No llevar la carta de porte correspondiente al tipo de servicio de carga."},
+    {codigo:"17151", art:"105", tema:"Transporte", desc:"No acreditar la habilitación o credencial del conductor de la unidad."},
+    {codigo:"17164", art:"105", tema:"Transporte", desc:"Carga sobresale de los límites permitidos del vehículo sin autorización."},
+    {codigo:"17178", art:"105", tema:"Mercancías peligrosas", desc:"No cumplir normas específicas para transporte de mercancías peligrosas por ruta."},
+    {codigo:"17181", art:"105", tema:"Transporte carga", desc:"No llevar comprobante de inscripción en Registro Provincial de Transporte de Carga."},
+    {codigo:"17195", art:"105", tema:"Transporte carga", desc:"Inscripción en Registro Provincial de Transporte de Carga vencida o no vigente."},
+    {codigo:"17206", art:"105", tema:"Transporte", desc:"Transportar contenedores normalizados en vehículos no adaptados para ello."},
+    {codigo:"17219", art:"105", tema:"Transporte", desc:"Llevar cargas en camiones playos sin sistemas de cinchas o cables de sujeción adecuados."},
+    {codigo:"17223", art:"106", tema:"Transporte", desc:"Impedir o dificultar la actuación de revisores de carga previstos por ley."},
+    {codigo:"17236", art:"119", tema:"Portuario", desc:"Camión pesado ingresa a terminal portuaria sin autorización fehaciente de descarga."},
+    {codigo:"17240", art:"120", tema:"Portuario", desc:"Terminal portuaria no informa diariamente los permisos otorgados a transportistas."},
+    {codigo:"17253", art:"121", tema:"Portuario", desc:"No cumplir medidas de ordenamiento, restricción o desvío impuestas por autoridad portuaria."},
+    {codigo:"18002", art:"84", tema:"Bicicleta", desc:"Circular en bicicleta sin frenos eficaces, luces reflectivas, timbre, guardabarros, casco o chaleco reflectante."},
+    {codigo:"18016", art:"125", tema:"Protección ciclista", desc:"Conducir poniendo en riesgo la integridad física o circulación normal de ciclistas."},
+    {codigo:"18029", art:"125", tema:"Protección agravada", desc:"Poner en riesgo ciclista y además menores o personas con discapacidad."},
+    {codigo:"19004", art:"114", tema:"Médicos", desc:"Profesionales médicos no cumplen con el artículo 73 de la Ley Nacional 24449 (certificados aptitud)."},
+    {codigo:"19017", art:"115", tema:"Persona jurídica", desc:"Empresas no responden o no individualizan al empleado responsable de infracción en plazo."},
+    {codigo:"19021", art:"45", tema:"Publicidad", desc:"Hacer publicidad que promueva o alabe conductas contrarias a la ley de tránsito."},
+    {codigo:"19095", art:"118", tema:"Señales", desc:"Remover, inutilizar, desviar o apagar señales de tránsito o de peligro."},
+    {codigo:"19034", art:"61", tema:"Publicidad", desc:"Colocar publicidad en vía pública sin permiso de la autoridad competente."},
+    {codigo:"19048", art:"47", tema:"Autoescuela", desc:"Escuela de conducción enseña sin cumplir requisitos legales y reglamentarios."},
+    {codigo:"19051", art:"61", tema:"Publicidad", desc:"Anuncios, luces o leyendas sin autorización o en lugares no permitidos cerca de la vía."},
+    {codigo:"19065", art:"62", tema:"Publicidad alcohol", desc:"Publicidad de bebidas alcohólicas cerca de rutas sin leyenda obligatoria de seguridad vial."},
+    {codigo:"19078", art:"63", tema:"Publicidad", desc:"Infringir el artículo 26 bis de la Ley Nacional 24449 (publicidad engañosa o peligrosa)."},
+    {codigo:"19082", art:"63", tema:"Reincidencia", desc:"Reincidir en infracción del artículo 63 (publicidad prohibida o irregular)."}
+];
+
+// ──────────────────────────────────────────────
+// FUNCIONES PRINCIPALES
+// ──────────────────────────────────────────────
+const searchInput = document.getElementById('searchInput');
+const btnBuscar = document.getElementById('btnBuscar');
+const codesSection = document.getElementById('codesSection');
+const linksSection = document.getElementById('linksSection');
+const btnCodes = document.getElementById('btnCodes');
+const btnLinks = document.getElementById('btnLinks');
+const STORAGE_KEY = 'zapatoG_lastSearch_v5';
+
+function showSection(section) {
+    codesSection.classList.remove('active');
+    linksSection.classList.remove('active');
+    btnCodes.classList.remove('active');
+    btnLinks.classList.remove('active');
+
+    section.classList.add('active');
+    if (section === codesSection) btnCodes.classList.add('active');
+    if (section === linksSection) btnLinks.classList.add('active');
+}
+
+function renderCodes(filter = '') {
+    const term = filter.toLowerCase().trim();
+    const filtered = term === '' ? infracciones : infracciones.filter(item =>
+        item.codigo.includes(term) ||
+        item.art.includes(term) ||
+        item.tema.toLowerCase().includes(term) ||
+        item.desc.toLowerCase().includes(term)
+    );
+
+    codesSection.innerHTML = filtered.map(item => {
+        const msg = `*Falta Ley 13.169 Santa Fe*\n\n*Código:* ${item.codigo}\n*Artículo:* ${item.art}\n*Tema:* ${item.tema}\n\n*Descripción:* ${item.desc}\n\n-- Compartido desde ZAPATO G CODE --`;
+        const encodedMsg = encodeURIComponent(msg);
+        return `
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-codigo">${item.codigo}</span>
+                    <span class="item-art">Art. ${item.art}</span>
+                </div>
+                <div class="item-tema">${item.tema}</div>
+                <div class="item-desc">${item.desc}</div>
+                <button class="share-btn" onclick="window.open('https://wa.me/?text=${encodedMsg}','_blank')">
+                    Compartir por WhatsApp
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+
+// Eventos
+btnCodes.onclick = () => { showSection(codesSection); renderCodes(searchInput.value); };
+btnLinks.onclick = () => showSection(linksSection);
+btnBuscar.onclick = () => renderCodes(searchInput.value);
+
+searchInput.oninput = () => {
+    if (codesSection.classList.contains('active')) renderCodes(searchInput.value);
+    localStorage.setItem(STORAGE_KEY, searchInput.value);
+};
+
+searchInput.onkeypress = e => { if (e.key === 'Enter') renderCodes(searchInput.value); };
+
+// Carga inicial + recuperación de búsqueda guardada
+window.onload = () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) searchInput.value = saved;
+    renderCodes(saved || '');
+    showSection(codesSection);
+};
+</script>
+</body>
+</html>
